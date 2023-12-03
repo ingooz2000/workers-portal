@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab - youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Responsive Registration Form | CodingLab </title>
+    <link rel="stylesheet" href="loginstyle.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+  <div class="title">Log In</div>
+  <div class="content">
+    <form action="login.php" method="POST">
+      <div class="user-details">
+  <div class="input-box">
+    <span class="details">Email</span>
+    <input type="text" name="mail" placeholder="Enter your email" required>
+  </div>
+  <div class="input-box">
+    <span class="details">Password</span>
+    <input type="password" name="pass" placeholder="Enter your password" required>
+  </div>
+  <div class="button">
+    <input type="submit" value="Log In">
+  </div>
+  </div>
+  
+  </form>
+
+  
+  </div>
+  <label>Don't Have An Account?
+    <form action="registerbutton.php" method="post">
+      <div class="">
+        <input type="submit" name="register_as" value="Register as Customer">
+        <input type="submit" name="register_as" value="Register as Contractor">
+        <input type="submit" name="register_as" value="Register as Worker">
+      </div>
+    </form>
+  
+  </div>
+  
+  </body>
+  </html>
