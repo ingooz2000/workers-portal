@@ -3,26 +3,40 @@
 include("db.php");
 
 
-
-// Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the worker ID from the POST data
+   
     $workerId = $_POST['id'];
-    $approve=$_POST['app'];
+    $approve = $_POST['app'];
 
-    // TODO: Implement the logic to update the worker status as approved in the database
-    // For example: $result = approveWorkerInDatabase($workerId);
-    if($approve){
-    
+   
+    $statusQuery = "SELECT status FROM approval_requests WHERE id='$workerId'";
+    $statusResult = mysqli_query($connection, $statusQuery);
 
-    $query = "UPDATE approval_requets SET status='approved' where id='$workerId'"; 
+    if ($statusResult) {
+        $row = mysqli_fetch_assoc($statusResult);
+        $currentStatus = $row['status'];
 
-    
+        
+        if ($currentStatus !== 'approved' && $approve) {
+            
+            $query = "UPDATE approval_requests SET status='approved' WHERE id='$workerId'";
+            $updateResult = mysqli_query($connection, $query);
+
+            if (!$updateResult) {
+               
+                die("Error updating status: " . mysqli_error($connection));
+            }
+
+            
+            header("Location: workers.php");
+            exit();
+        } else {
+            
+            die("Worker is already approved.");
+        }
+    } else {
+        
+        die("Error fetching status: " . mysqli_error($connection));
     }
-
-
-    // After updating the status, you can redirect back to the original page
-    header("Location: workers.php");
-    exit();
 }
 ?>
