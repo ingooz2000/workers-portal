@@ -1,4 +1,6 @@
-<?php include 'demo.php';
+<?php 
+include 'demo.php';
+include 'approve_worker.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +35,8 @@
   </head>
 
 <body>
+
+
 
 
 
@@ -82,21 +86,24 @@
     <span class="notification-count">3</span>
     <!-- You can add a dropdown or handle notifications with JavaScript here -->
   </div>
-
-    <div>
-   
-
-   
+  <?php
     
 
-    
-</div>
+    foreach ($workers as $worker) {
+        // If a filter term is provided, check if the contractor matches the filter
+        // If not, skip to the next iteration of the loop
+        
+               ?>
+
+   
  <h2>Approval Requests</h2>
 <div class="worker-card">
-    <p class="worker-info">Worker ID: <?php echo $row['id']; ?>, Name: <?php echo $row['first_name'] . " " . $row['last_name']; ?></p>
+    <p class="worker-info">Worker ID: <?php echo $worker['id']; ?>, Name: <?php echo $worker['name'] . " " . $worker['last']; ?></p>
+    <p class="worker-info">Email: <?php echo $worker['email']; ?>, Phone: <?php echo $worker['phone'] ; ?></p>
+    <p class="worker-info">Place: <?php echo $worker['place']; ?>, ID: <?php echo $worker['id'] ; ?></p>
     <div class="action-buttons">
-        <button onclick="approveWorker(<?php echo $row['id']; ?>)">Approve</button>
-        <button onclick="rejectWorker(<?php echo $row['id']; ?>)">Reject</button>
+        <button onclick="approveWorker(<?php echo $worker['id']; ?>)" name="app">Approve</button>
+        <button onclick="rejectWorker(<?php echo $worker['id']; ?>)" name="rej">Reject</button>
     </div>
 
 
@@ -105,6 +112,12 @@
 
 
   
+<?php
+    }
+?>
+
+<h2>Approved Workers</h2>
+
 
 </section>
 

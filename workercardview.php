@@ -1,5 +1,5 @@
-<?
-
+<?php
+include 'worker_profilename.php';
 $workerid=$user_data2['wid'];
 $_SESSION['worker_id'] = $workerid;
 ?>
@@ -51,7 +51,7 @@ $_SESSION['worker_id'] = $workerid;
 
     <div class="profile">
       <img src="" alt="" class="img-fluid rounded-circle">
-      <h1 class="text-light"><a href="index.html"><?php include 'worker_profilename.php'; echo $user_data2['first_name']; ?></a></h1>
+      <h1 class="text-light"><a href="index.html"><?php  echo $user_data2['first_name']; ?></a></h1>
       <div class="social-links mt-3 text-center">
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
