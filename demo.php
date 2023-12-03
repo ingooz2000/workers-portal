@@ -2,6 +2,9 @@
 session_start();
 include("db.php");
 
+$workers = []; // Initialize the variable for approval requests
+$workers1 = [];
+
 // Check if the user is a contractor
 if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
@@ -26,7 +29,7 @@ if (isset($_SESSION['email'])) {
     $query = "SELECT approval_requests.id, worker.first_name, worker.last_name,worker.email,worker.phone,worker.place,worker.wid
               FROM approval_requests
               INNER JOIN worker ON approval_requests.wid = worker.wid
-              WHERE approval_requests.coid = $contractor_id";
+              WHERE approval_requests.coid = $contractor_id AND approval_requests.status='pending'";
 
     $result = mysqli_query($con, $query);
     if ($result && mysqli_num_rows($result) > 0) {
@@ -53,4 +56,41 @@ if (isset($_SESSION['email'])) {
     exit();
 }
 }
+
+
+
+// $nextquery = "SELECT approval_requests.id, worker.first_name, worker.last_name, worker.email, worker.phone, worker.place, worker.wid
+//                 FROM approval_requests
+//                 INNER JOIN worker ON approval_requests.wid = worker.wid
+//                 WHERE approval_requests.coid = $contractor_id AND approval_requests.status='approved'";
+
+// $result = mysqli_query($con, $nextquery);
+
+// if ($result && mysqli_num_rows($result) > 0) {
+//     while ($row = mysqli_fetch_assoc($result)) {
+//         $workerdata = array(
+//             'name' => $row['first_name'],
+//             'last' => $row['last_name'],
+//             'email' => $row['email'],
+//             'phone' => $row['phone'],
+//             'place' => $row['place'],
+//             'id' => $row['wid']
+//         );
+
+//         // Append the array to the $workers1 array
+//         $workers1[] = $workerdata;
+//     }
+// } else {
+//     // Redirect to login page if there are no approved requests
+//     header("location: contractorhome.php");
+//     exit();
+// }
+     
 ?>
+
+
+
+
+
+
+

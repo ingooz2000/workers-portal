@@ -1,6 +1,9 @@
 <?php 
 include 'demo.php';
-include 'approve_worker.php';
+
+
+// include 'approve_worker.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +66,7 @@ include 'approve_worker.php';
         <ul>
           
           <li><a href="contractorhome.php" ><i class="bx bx-home"></i> <span>About</span></a></li>
+          <li><a href="approved_worker.php"><i class="bx bx-file-blank"></i> <span>Approved Worker</span></a></li>
           <li><a href="workers.php" ><i class="bx bx-file-blank"></i> <span>Workers</span></a></li>
           <li><a href="#portfolio" ><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
           <li><a href="contractoredit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
@@ -90,8 +94,7 @@ include 'approve_worker.php';
     
 
     foreach ($workers as $worker) {
-        // If a filter term is provided, check if the contractor matches the filter
-        // If not, skip to the next iteration of the loop
+        
         
                ?>
 
@@ -102,22 +105,24 @@ include 'approve_worker.php';
     <p class="worker-info">Email: <?php echo $worker['email']; ?>, Phone: <?php echo $worker['phone'] ; ?></p>
     <p class="worker-info">Place: <?php echo $worker['place']; ?>, ID: <?php echo $worker['id'] ; ?></p>
     <div class="action-buttons">
-        <button onclick="approveWorker(<?php echo $worker['id']; ?>)" name="app">Approve</button>
-        <button onclick="rejectWorker(<?php echo $worker['id']; ?>)" name="rej">Reject</button>
+    <form action="approve_reject.php" method="post">
+    <input type="hidden" name="worker_id" value="<?php echo $worker['id']; ?>">
+    <button type="submit" name="action" value="approve">Approve</button>
+    </form>
+
+    <form action="approve_reject.php" method="post">
+    <input type="hidden" name="worker_id" value="<?php echo $worker['id']; ?>">
+    <button type="submit" name="action" value="reject">Reject</button>
+    </form>
     </div>
 
-
-    
 </div>
 
 
-  
 <?php
     }
 ?>
-
-<h2>Approved Workers</h2>
-
+ <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
 
 </section>
 

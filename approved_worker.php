@@ -1,3 +1,8 @@
+<?php 
+include 'demo.php';
+// include 'approve_worker.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +37,10 @@
 
 <body>
 
+
+
+
+
   <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
@@ -41,7 +50,7 @@
 
       <div class="profile">
         <img src="" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><?php include 'contractor_profilename.php';echo $user_data['first_name'] ?></a></h1>
+        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name'] .' '. $user_data['coid']; ?></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -63,78 +72,50 @@
          
         </ul>
       </nav><!-- .nav-menu -->
+
+      
+
+    
+
     </div>
   </header>
   <main id="main">
 
-    <section id="about" class="about">
+  <section id="about" class="about">
     <div class="container">
-
-        <div class="content">
-            <form action="contractoreditsec.php" method="POST">
-              <div class="user-details">
-                <div class="input-box">
-                  <span class="details">First Name</span>
-                  <input type="text" name="first" value="<?php echo $user_data['first_name'];?>" required>
-                </div>
-                <div class="input-box">
-                  <span class="details">Last Name</span>
-                  <input type="text" name="second" value="<?php echo $user_data['last_name'];?>" required>
-                </div>
-                <div class="input-box">
-                  <span class="details">Email</span>
-                  <input type="text" name="mail"value="<?php echo $user_data['email'];?>" required>
-                </div>
-                <div class="input-box">
-                  <span class="details">Phone Number</span>
-                  <input type="text" name="phno" value="<?php echo $user_data['phone'];?>" required>
-                </div>
-                <div class="input-box">
-                  <span class="details">Address</span>
-                  <input type="text" name="add" value="<?php echo $user_data['address'];?>" required>
-                </div>
-                <div class="input-box">
-                  <span class="details">Place</span>
-                  <input type="text" name="place" value="<?php echo $user_data['place'];?>" required>
-                </div>
-
-                <div>
-                    <label for="dropdown">Select Type Of Work:</label>
-                   <div class="styled-select">
-                       <select id="dropdown" name="type">
-                           <option value="select">Select</option>
-                           <option value="painter">Painter</option>
-                           <option value="carpenter">Carpenter</option>
-                           <option value="plumber">Plumber</option>
-                       </select>
-                   </div>
-                   
-                
-                
-                </div>
-
-                <div class="button">
-                    <input type="submit" value="Submit">
-                </div>
-
-             
-
-              </div>
-              
-             
-            
-             
-              
-            </form>
-          </div>
-
-
-
-
-    </div> 
-    </section>
-  </main>
+    <div class="notification-bell">
+    <i class="fas fa-bell"></i>
+    <span class="notification-count">3</span>
+    <!-- You can add a dropdown or handle notifications with JavaScript here -->
+  </div>
   
+
+<h2>Approved Workers</h2>
+<?php
+    foreach ($workers1 as $worker1) {
+        
+        
+  ?>
+
+  <div class="worker-card">
+    
+    <p class="worker-info">Worker ID: <?php echo $worker1['id']; ?>, Name: <?php echo $worker1['name'] . " " . $worker1['last']; ?></p>
+    <p class="worker-info">Email: <?php echo $worker1['email']; ?>, Phone: <?php echo $worker1['phone'] ; ?></p>
+    <p class="worker-info">Place: <?php echo $worker1['place']; ?>, ID: <?php echo $worker1['id'] ; ?></p>
+   </div>
+
+
+  
+<?php
+    }
+?>
+
+
+</section>
+
+</main>
+<script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+
 
   
 </body>

@@ -56,6 +56,7 @@
         <ul>
           
           <li><a href="contractorhome.php" ><i class="bx bx-home"></i> <span>About</span></a></li>
+          <li><a href="approved_worker.php"><i class="bx bx-file-blank"></i> <span>Approved Worker</span></a></li>
           <li><a href="workers.php"><i class="bx bx-file-blank"></i> <span>Workers</span></a></li>
           <li><a href="#portfolio" ><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
           <li><a href="contractoredit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
