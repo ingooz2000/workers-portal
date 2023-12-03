@@ -93,7 +93,7 @@ include 'demo.php';
   <?php
     
 
-    foreach ($workers as $worker) {
+    foreach ($workerspen as $workerpen) {
         
         
                ?>
@@ -101,17 +101,19 @@ include 'demo.php';
    
  <h2>Approval Requests</h2>
 <div class="worker-card">
-    <p class="worker-info">Worker ID: <?php echo $worker['id']; ?>, Name: <?php echo $worker['name'] . " " . $worker['last']; ?></p>
-    <p class="worker-info">Email: <?php echo $worker['email']; ?>, Phone: <?php echo $worker['phone'] ; ?></p>
-    <p class="worker-info">Place: <?php echo $worker['place']; ?>, ID: <?php echo $worker['id'] ; ?></p>
+    <p class="worker-info">Worker ID: <?php echo $workerpen['id']; ?>, Name: <?php echo $workerpen['name'] . " " . $workerpen['last']; ?></p>
+    <p class="worker-info">Email: <?php echo $workerpen['email']; ?>, Phone: <?php echo $workerpen['phone'] ; ?></p>
+    <p class="worker-info">Place: <?php echo $workerpen['place']; ?>, ID: <?php echo $workerpen['id'] ; ?></p>
     <div class="action-buttons">
     <form action="approve_reject.php" method="post">
-    <input type="hidden" name="worker_id" value="<?php echo $worker['id']; ?>">
+    <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
+    <input type="hidden" name="worker_id" value="<?php echo $workerpen['id']; ?>">
     <button type="submit" name="action" value="approve">Approve</button>
     </form>
 
     <form action="approve_reject.php" method="post">
-    <input type="hidden" name="worker_id" value="<?php echo $worker['id']; ?>">
+    <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
+    <input type="hidden" name="worker_id" value="<?php echo $workerpen['id']; ?>">
     <button type="submit" name="action" value="reject">Reject</button>
     </form>
     </div>
@@ -122,7 +124,7 @@ include 'demo.php';
 <?php
     }
 ?>
- <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
+ 
 
 </section>
 

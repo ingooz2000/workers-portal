@@ -44,47 +44,42 @@ if (isset($_SESSION['email'])) {
             );
             
             // Append the array to the $contractors array
-            $workers[] = $workerdata;
+            $workerpen[] = $workerdata;
         }
 
 
     // Include the HTML code for worker profile
     // include("workers.php");
+} 
+}
+
+
+$nextquery = "SELECT approval_requests.id, worker.first_name, worker.last_name, worker.email, worker.phone, worker.place, worker.wid
+                FROM approval_requests
+                INNER JOIN worker ON approval_requests.wid = worker.wid
+                WHERE approval_requests.coid = $contractor_id AND approval_requests.status='approved'";
+
+$result = mysqli_query($con, $nextquery);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $workerdata = array(
+            'name' => $row['first_name'],
+            'last' => $row['last_name'],
+            'email' => $row['email'],
+            'phone' => $row['phone'],
+            'place' => $row['place'],
+            'id' => $row['wid']
+        );
+
+        // Append the array to the $workers1 array
+        $workersapp[] = $workerdata;
+    }
 } else {
-    // Redirect to login page if the user is not logged in
+    // Redirect to login page if there are no approved requests
     header("location: contractorhome.php");
     exit();
 }
-}
-
-
-
-// $nextquery = "SELECT approval_requests.id, worker.first_name, worker.last_name, worker.email, worker.phone, worker.place, worker.wid
-//                 FROM approval_requests
-//                 INNER JOIN worker ON approval_requests.wid = worker.wid
-//                 WHERE approval_requests.coid = $contractor_id AND approval_requests.status='approved'";
-
-// $result = mysqli_query($con, $nextquery);
-
-// if ($result && mysqli_num_rows($result) > 0) {
-//     while ($row = mysqli_fetch_assoc($result)) {
-//         $workerdata = array(
-//             'name' => $row['first_name'],
-//             'last' => $row['last_name'],
-//             'email' => $row['email'],
-//             'phone' => $row['phone'],
-//             'place' => $row['place'],
-//             'id' => $row['wid']
-//         );
-
-//         // Append the array to the $workers1 array
-//         $workers1[] = $workerdata;
-//     }
-// } else {
-//     // Redirect to login page if there are no approved requests
-//     header("location: contractorhome.php");
-//     exit();
-// }
      
 ?>
 

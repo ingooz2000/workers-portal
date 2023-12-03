@@ -92,16 +92,16 @@ include 'demo.php';
 
 <h2>Approved Workers</h2>
 <?php
-    foreach ($workers1 as $worker1) {
+    foreach ($workersapp as $workerapp) {
         
         
   ?>
 
   <div class="worker-card">
     
-    <p class="worker-info">Worker ID: <?php echo $worker1['id']; ?>, Name: <?php echo $worker1['name'] . " " . $worker1['last']; ?></p>
-    <p class="worker-info">Email: <?php echo $worker1['email']; ?>, Phone: <?php echo $worker1['phone'] ; ?></p>
-    <p class="worker-info">Place: <?php echo $worker1['place']; ?>, ID: <?php echo $worker1['id'] ; ?></p>
+    <p class="worker-info">Worker ID: <?php echo $workerapp['id']; ?>, Name: <?php echo $workerapp['name'] . " " . $workerapp['last']; ?></p>
+    <p class="worker-info">Email: <?php echo $workerapp['email']; ?>, Phone: <?php echo $workerapp['phone'] ; ?></p>
+    <p class="worker-info">Place: <?php echo $workerapp['place']; ?>, ID: <?php echo $workerapp['id'] ; ?></p>
    </div>
 
 
