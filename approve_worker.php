@@ -2,7 +2,7 @@
 // approve_worker.php
 include("db.php");
 
-include 'demo.php';
+
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
