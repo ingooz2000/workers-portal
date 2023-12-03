@@ -1,26 +1,4 @@
-<?php
-session_start();
-include("db.php");
-
-// Check if the contractor is logged in
-if (!isset($_SESSION['contractor_id'])) {
-    
-    exit();
-}
-else{
-
-// Get the contractor's ID
-$contractor_id = $_SESSION['contractor_id'];
-
-// Fetch approval requests for the current contractor
-$query = "SELECT approval_requests.id, worker.first_name, worker.last_name
-          FROM approval_requests
-          INNER JOIN worker ON approval_requests.wid = worker.wid
-          WHERE approval_requests.coid = $contractor_id";
-
-
-$result = mysqli_query($con, $query);}
-
+<?php include 'demo.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +45,7 @@ $result = mysqli_query($con, $query);}
 
       <div class="profile">
         <img src="" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><?php include 'contractor_profilename.php'; echo $user_data['first_name'] .' '. $user_data['coid']; ?></a></h1>
+        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name'] .' '. $user_data['coid']; ?></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -106,27 +84,25 @@ $result = mysqli_query($con, $query);}
   </div>
 
     <div>
-    <h1>Contractor Profile</h1>
+   
 
-    <h2>Approval Requests</h2>
+   
     
 
-    <?php
-                    if ($result && mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            // Display the worker's name
-                            echo "<p>Worker ID: " . $row['id'] . ", Name: " . $row['first_name'] . " " . $row['last_name'] . "</p>";
-                            // Add approve and reject buttons with appropriate links
-                            echo '<button onclick="approveWorker(' . $row['id'] . ')">Approve</button>';
-                            echo '<button onclick="rejectWorker(' . $row['id'] . ')">Reject</button>';
-                        }
-                    } else {
-                        // No approval requests found for the contractor
-                        echo "<p>No approval requests found for the contractor.</p>";
-                    }
-                    ?>
     
 </div>
+ <h2>Approval Requests</h2>
+<div class="worker-card">
+    <p class="worker-info">Worker ID: <?php echo $row['id']; ?>, Name: <?php echo $row['first_name'] . " " . $row['last_name']; ?></p>
+    <div class="action-buttons">
+        <button onclick="approveWorker(<?php echo $row['id']; ?>)">Approve</button>
+        <button onclick="rejectWorker(<?php echo $row['id']; ?>)">Reject</button>
+    </div>
+
+
+    
+</div>
+
 
   
 

@@ -1,4 +1,4 @@
-<?php
+<?
 
 $workerid=$user_data2['wid'];
 $_SESSION['worker_id'] = $workerid;
