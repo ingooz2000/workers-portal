@@ -1,3 +1,10 @@
+<?php
+include 'customer_profilename.php';
+$customerid=$user_data1['cid'];
+$_SESSION['customer_id'] = $customerid;
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -44,7 +51,7 @@
 
     <div class="profile">
       <img src="" alt="" class="img-fluid rounded-circle">
-      <h1 class="text-light"><a href="index.html"><?php include 'customer_profilename.php';echo $user_data1['first_name'] ?></a></h1>
+      <h1 class="text-light"><a href="index.html"><?php  echo $user_data1['first_name']; ?></a></h1>
       <div class="social-links mt-3 text-center">
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -116,6 +123,10 @@
                                 <li class="list-inline-item"><i class="mdi mdi-wallet"></i> Contact:<?php echo $contractor['phone'];?></li>
                                 <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Mail:<?php echo $contractor['email'];?></li>
                             </ul>
+                            <form action="request_contractor.php" method="post">
+                            <input type="hidden" name="contractor_id" value="<?php echo $contractor['id']; ?>">
+                            <button type="submit" class="btn btn-primary mt-3" name="submit_request">Request Service</button>
+                            </form>
 
                             
                         </div>

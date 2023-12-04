@@ -9,7 +9,7 @@
     }
     else{
 
-    $query="select first_name,last_name,email,phone,address,place from customer where email ='$email' limit 1";
+    $query="select cid,first_name,last_name,email,phone,address,place from customer where email ='$email' limit 1";
     $result= mysqli_query($con,$query);
 
     if($result)

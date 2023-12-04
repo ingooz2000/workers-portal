@@ -1,4 +1,7 @@
-
+<?php
+include 'contractorapprove.php';
+$customerapprve=$customerapp;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +45,7 @@
 
       <div class="profile">
         <img src="" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><?php include 'contractor_profilename.php';echo $user_data['first_name'] ?></a></h1>
+        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name']; ?></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -95,19 +98,27 @@
                 <li><i class="bi bi-chevron-right"></i> <strong>Work Type:</strong> <span><?php echo $user_data['type'] ?></span></li>
               </ul>
             </div>
-            <!-- <div class="col-lg-6">
-              <ul>
-                <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Master</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>PhEmailone:</strong> <span>email@example.com</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
-              </ul>
-            </div> -->
+           
             
           </div>
-          <p>
+          <h2>Approval Requests</h2>
+    <div class="worker-card">
+    <p class="worker-info">Customer ID: <?php echo $customerapprve['id']; ?>, Name: <?php echo $customerapprve['name'] . " " . $customerapprve['last']; ?></p>
+    <p class="worker-info">Email: <?php echo $customerapprve['email']; ?>, Phone: <?php echo $customerapprve['phone'] ; ?></p>
+    <p class="worker-info">Place: <?php echo $customerapprve['place']; ?>, ID: <?php echo $customerapprve['id'] ; ?></p>
+    <div class="action-buttons">
+    <form action="approve_reject.php" method="post">
+    <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
+    <input type="hidden" name="worker_id" value="<?php echo $customerapprve['id']; ?>">
+    <button type="submit" name="action" value="approve">Approve</button>
+    </form>
 
-          </p>
+    <form action="approve_reject.php" method="post">
+    <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
+    <input type="hidden" name="worker_id" value="<?php echo $customerapprve['id']; ?>">
+    <button type="submit" name="action" value="reject">Reject</button>
+    </form>
+    </div>
           
           
         </div>
