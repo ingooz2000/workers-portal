@@ -204,3 +204,35 @@ body {
   background-color: #45a049;
 }
 
+worker-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.customer-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.customer-info {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.customer_action-buttons button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.customer_action-buttons button:hover {
+  background-color: #45a049;
+}
+

@@ -2,8 +2,8 @@
 session_start();
 include("db.php");
 
-$workers = []; // Initialize the variable for approval requests
-$workers1 = [];
+$workerspen = []; // Initialize the variable for approval requests
+$workersapp = [];
 
 // Check if the user is a contractor
 if (isset($_SESSION['email'])) {
@@ -53,6 +53,9 @@ if (isset($_SESSION['email'])) {
 } 
 }
 
+if (isset($_SESSION['contractor_id'])) {
+    // Check if the user is a contractor
+    $contractor_id = $_SESSION['contractor_id'];
 
 $nextquery = "SELECT approval_requests.id, worker.first_name, worker.last_name, worker.email, worker.phone, worker.place, worker.wid
                 FROM approval_requests
@@ -80,7 +83,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     header("location: contractorhome.php");
     exit();
 }
-     
+} 
 ?>
 
 

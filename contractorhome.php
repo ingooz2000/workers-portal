@@ -1,6 +1,6 @@
 <?php
 include 'contractorapprove.php';
-$customerapprve=$customerapp;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,26 +102,26 @@ $customerapprve=$customerapp;
             
           </div>
           <h2>Approval Requests</h2>
-    <div class="worker-card">
-    <p class="worker-info">Customer ID: <?php echo $customerapprve['id']; ?>, Name: <?php echo $customerapprve['name'] . " " . $customerapprve['last']; ?></p>
-    <p class="worker-info">Email: <?php echo $customerapprve['email']; ?>, Phone: <?php echo $customerapprve['phone'] ; ?></p>
-    <p class="worker-info">Place: <?php echo $customerapprve['place']; ?>, ID: <?php echo $customerapprve['id'] ; ?></p>
-    <div class="action-buttons">
-    <form action="approve_reject.php" method="post">
-    <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
-    <input type="hidden" name="worker_id" value="<?php echo $customerapprve['id']; ?>">
-    <button type="submit" name="action" value="approve">Approve</button>
-    </form>
+    <div class="customer-card">
+    <?php foreach ($customerapp as $customer){ ?>
+        <p class="customer-info">Customer ID: <?php echo $customerapp['id']; ?>, Name: <?php echo $customerapp['name'] . " " . $customerapp['last']; ?></p>
+        <p class="customer-info">Email: <?php echo $customerapp['email']; ?>, Phone: <?php echo $customerapp['phone']; ?></p>
+        <p class="customer-info">Place: <?php echo $customerapp['place']; ?>, ID: <?php echo $customerapp['id']; ?></p>
+        <div class="customer_action-buttons">
+            <form action="approve_reject.php" method="post">
+                <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
+                <input type="hidden" name="worker_id" value="<?php echo $customerapp['id']; ?>">
+                <button type="submit" name="action" value="approve">Approve</button>
+            </form>
 
-    <form action="approve_reject.php" method="post">
-    <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
-    <input type="hidden" name="worker_id" value="<?php echo $customerapprve['id']; ?>">
-    <button type="submit" name="action" value="reject">Reject</button>
-    </form>
-    </div>
-          
-          
+            <form action="approve_reject.php" method="post">
+                <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
+                <input type="hidden" name="worker_id" value="<?php echo $customerapp['id']; ?>">
+                <button type="submit" name="action" value="reject">Reject</button>
+            </form>
         </div>
+    <?php } ?>
+</div>
       </div>
 
     </div>

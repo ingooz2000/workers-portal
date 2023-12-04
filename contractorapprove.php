@@ -26,10 +26,10 @@ if (isset($_SESSION['email'])) {
     $contractor_id = $_SESSION['contractor_id'];
 
     // Fetch approval requests for the current contractor
-    $query = "SELECT contractor_requests.id, customer.first_name, customer.last_name,customer.email,customer.phone,customer.place,customer.cid
-              FROM contractor_requests
-              INNER JOIN customer ON contractor_requests.cid = customer.cid
-              WHERE contractor_requests.coid = $contractor_id AND contractor_requests.status='pending'";
+    $query = "SELECT contractor_requests.id, customer.first_name, customer.last_name, customer.email, customer.phone, customer.place, customer.cid
+    FROM contractor_requests
+    INNER JOIN customer ON contractor_requests.cid = customer.cid
+    WHERE contractor_requests.coid = $contractor_id AND contractor_requests.status='pending'";
 
     $result = mysqli_query($con, $query);
     if ($result && mysqli_num_rows($result) > 0) {
@@ -43,7 +43,8 @@ if (isset($_SESSION['email'])) {
                 'id' => $row['cid']
             );
             
-            // Append the array to the $contractors array
+            
+            
             $customerapp[] = $customerdata;
         }
     }else {
