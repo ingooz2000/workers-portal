@@ -17,7 +17,8 @@ if (isset($_SESSION['worker_id']) && isset($_POST['contractor_id'])) {
     $result = mysqli_query($con, $insertQuery);
 
     if ($result) {
-        echo "Approval request sent successfully!";
+        echo "<script type='text/javascript'> alert('Approval Request sent Successfully ')</script>";
+        header("Refresh:0.5;url=workercardview.php");
     } else {
         echo "Failed to send approval request. Please try again. Error: " . mysqli_error($con);
     }

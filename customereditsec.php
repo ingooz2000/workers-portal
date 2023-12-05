@@ -24,7 +24,7 @@
             mysqli_query($con, $query) or die(mysqli_error($con));
 
             echo "<script type='text/javascript'> alert('Updated Successfully')</script>";
-            header("location:customeredit.php");
+            header("Refresh: 0.5; url=customeredit.php");
 
         }
         else

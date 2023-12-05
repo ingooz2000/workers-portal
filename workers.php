@@ -2,7 +2,7 @@
 include 'workerapprove.php';
 
 
-// include 'approve_worker.php';
+
 
 ?>
 <!DOCTYPE html>
@@ -85,18 +85,15 @@ include 'workerapprove.php';
 
   <section id="about" class="about">
     <div class="container">
-    <div class="notification-bell">
-    <i class="fas fa-bell"></i>
-    <span class="notification-count">3</span>
-    <!-- You can add a dropdown or handle notifications with JavaScript here -->
-  </div>
+    
   <?php
+  if(!empty($workerspen)){
     
 
     foreach ($workerspen as $workerpen) {
         
         
-               ?>
+    ?>
 
    
  <h2>Approval Requests</h2>
@@ -122,6 +119,8 @@ include 'workerapprove.php';
 
 
 <?php
+    } }else {
+      echo "There Are No Requests";
     }
 ?>
  

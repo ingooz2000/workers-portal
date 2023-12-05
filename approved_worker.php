@@ -83,9 +83,7 @@ include 'workerapprove.php';
 
   <section id="about" class="about">
     <div class="container">
-    <div class="notification-bell">
-    <i class="fas fa-bell"></i>
-    <span class="notification-count">3</span>
+    
     <!-- You can add a dropdown or handle notifications with JavaScript here -->
   </div>
   

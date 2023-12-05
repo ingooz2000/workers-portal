@@ -1,7 +1,10 @@
 <?php
 include 'contractorapprove.php';
 
+  
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +38,7 @@ include 'contractorapprove.php';
   </head>
 
 <body>
+  <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id;?>">
 
   <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
@@ -103,25 +107,54 @@ include 'contractorapprove.php';
           </div>
           <h2>Approval Requests</h2>
     <div class="customer-card">
-    <?php foreach ($customerapp as $customer){ ?>
-        <p class="customer-info">Customer ID: <?php echo $customerapp['id']; ?>, Name: <?php echo $customerapp['name'] . " " . $customerapp['last']; ?></p>
-        <p class="customer-info">Email: <?php echo $customerapp['email']; ?>, Phone: <?php echo $customerapp['phone']; ?></p>
-        <p class="customer-info">Place: <?php echo $customerapp['place']; ?>, ID: <?php echo $customerapp['id']; ?></p>
+    <?php if (!empty($customerapp)) {
+    // The array is not empty, process the data
+    foreach($customerapp as $customer){
+    
+    
+  
+         ?>
+        <p class="customer-info">Customer ID: <?php echo $customer['id']; ?>, Name: <?php echo $customer['name'] . " " . $customer['last']; ?></p>
+        <p class="customer-info">Email: <?php echo $customer['email']; ?>, Phone: <?php echo $customer['phone']; ?></p>
+        <p class="customer-info">Place: <?php echo $customer['place']; ?>, ID: <?php echo $customer['id']; ?></p>
         <div class="customer_action-buttons">
-            <form action="approve_reject.php" method="post">
-                <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
-                <input type="hidden" name="worker_id" value="<?php echo $customerapp['id']; ?>">
+            <form action="contractor_approve_reject.php" method="post">
+                <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
+                <input type="hidden" name="customer_id" value="<?php echo $customer['id']; ?>">
                 <button type="submit" name="action" value="approve">Approve</button>
             </form>
 
-            <form action="approve_reject.php" method="post">
-                <input type="hidden" name="contractor_id" value="<?php echo $contractor_id; ?>">
-                <input type="hidden" name="worker_id" value="<?php echo $customerapp['id']; ?>">
+            <form action="contractor_approve_reject.php" method="post">
+                <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
+                <input type="hidden" name="customer_id" value="<?php echo $customer['id']; ?>">
                 <button type="submit" name="action" value="reject">Reject</button>
             </form>
         </div>
-    <?php } ?>
+    <?php }}else {
+      // The array is empty
+      echo "No approval requests found.";} ?>
 </div>
+
+<?php if (!empty($customeracc)) {
+    // The array is not empty, process the data
+    foreach($customeracc as $customer2){
+    
+    
+  
+         ?>
+        <p class="customer-info">Customer ID: <?php echo $customer2['id']; ?>, Name: <?php echo $customer2['name'] . " " . $customer2['last']; ?></p>
+        <p class="customer-info">Email: <?php echo $customer2['email']; ?>, Phone: <?php echo $customer2['phone']; ?></p>
+        <p class="customer-info">Place: <?php echo $customer2['place']; ?>, ID: <?php echo $customer2['id']; ?></p>
+        <div class="customer_action-buttons">
+            <form action="contractfinished.php" method="post">
+                <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
+                <input type="hidden" name="customer_id" value="<?php echo $customer2['id']; ?>">
+                <button type="submit" name="action" value="finished">Finished</button>
+            </form>
+
+            
+        </div>
+    <?php }} ?>
       </div>
 
     </div>

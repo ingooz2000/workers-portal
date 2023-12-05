@@ -147,14 +147,14 @@ form .user-details .input-box{
 
 
 
-body {
+/* body {
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-}
+} */
 
 .notification-bell {
   position: relative;
@@ -204,7 +204,7 @@ body {
   background-color: #45a049;
 }
 
-worker-card {
+.customer-card {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;

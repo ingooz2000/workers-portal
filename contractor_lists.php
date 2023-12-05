@@ -4,7 +4,7 @@
 
 include("db.php");
 
-$query = "SELECT * FROM contractor"; 
+$query = "SELECT * FROM contractor WHERE flag=0"; 
 
 $result = mysqli_query($con, $query);
 
