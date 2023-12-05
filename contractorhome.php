@@ -134,8 +134,9 @@ include 'contractorapprove.php';
       // The array is empty
       echo "No approval requests found.";} ?>
 </div>
-
-<?php if (!empty($customeracc)) {
+    <h2>Service Ongoing</h2>
+    <div class="customer-card">
+    <?php if (!empty($customeracc)) {
     // The array is not empty, process the data
     foreach($customeracc as $customer2){
     
@@ -156,6 +157,7 @@ include 'contractorapprove.php';
         </div>
     <?php }} ?>
       </div>
+      
 
     </div>
   </section>

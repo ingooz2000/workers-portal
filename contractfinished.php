@@ -22,16 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $flagQuery = "UPDATE contractor SET flag = 0 WHERE coid=$contractorId";
 
             // Execute the second query
-            if ($con->query($flagQuery) === TRUE) {
-                // Second query executed successfully
-                // echo "<script type='text/javascript'> 
-                //         alert('Updated Successfully');
-                //         setTimeout(function(){
-                //             window.location.href = 'contractorhome.php';
-                //         }, 3000);
-                //       </script>";
-                exit();  // Don't forget to exit after redirecting
-            } else {
+            // if ($con->query($flagQuery) === TRUE) {
+            //     Second query executed successfully
+            //     echo "<script type='text/javascript'> 
+            //             alert('Updated Successfully');
+            //             setTimeout(function(){
+            //                 window.location.href = 'contractorhome.php';
+            //             }, 3000);
+            //           </script>";
+            //     exit();  // Don't forget to exit after redirecting
+             else {
                 // Handle the error for the second query
                 echo "Error updating flag: " . $con->error;
             }

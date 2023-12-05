@@ -21,7 +21,7 @@
             mysqli_query($con, $query) or die(mysqli_error($con));
 
             echo "<script type='text/javascript'> alert('Successfully Register')</script>";
-            header("location: login.html");
+            header("Refresh 0.5: url=login.html");
 
 
         }
