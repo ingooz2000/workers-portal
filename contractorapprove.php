@@ -48,6 +48,7 @@ if (isset($_SESSION['contractor_id'])) {
             );
 
             $customerapp[] = $customerdata;
+            print_r($customerapp);
         }
 
        
@@ -85,6 +86,7 @@ while ($row = mysqli_fetch_assoc($result2)) {
   );
 
   $customeracc[] = $customerdata;
+  print_r($customeracc);
   
 }
 

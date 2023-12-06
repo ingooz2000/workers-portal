@@ -49,7 +49,7 @@ include 'contractorapprove.php';
 
       <div class="profile">
         <img src="" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name']; ?></a></h1>
+        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name'].' '.$user_data['last_name']; ?></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -65,7 +65,7 @@ include 'contractorapprove.php';
           <li><a href="contractorhome.php" ><i class="bx bx-home"></i> <span>About</span></a></li>
           <li><a href="approved_worker.php"><i class="bx bx-file-blank"></i> <span>Approved Worker</span></a></li>
           <li><a href="workers.php"><i class="bx bx-file-blank"></i> <span>Workers</span></a></li>
-          <li><a href="#portfolio" ><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
+          
           <li><a href="contractoredit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
           <li><a href="logout.php"><i class="bx bx-log-out"></i> <span>Logout</span></a></li>
          

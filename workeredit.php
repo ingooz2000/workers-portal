@@ -41,7 +41,7 @@
 
       <div class="profile">
         <img src="" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><?php include 'worker_profilename.php';echo $user_data2['first_name'] ?></a></h1>
+        <h1 class="text-light"><a href="index.html"><?php include 'worker_profilename.php';echo $user_data2['first_name'].' '.$user_data2['last_name']; ?></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -56,7 +56,7 @@
           
           <li><a href="workerhome.php" ><i class="bx bx-home"></i> <span>About</span></a></li>
           <li><a href="workercardview.php" ><i class="bx bx-file-blank"></i> <span>Contractors</span></a></li>
-          <li><a href="#portfolio" ><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
+          
           <li><a href="workeredit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
           <li><a href="logout.php"><i class="bx bx-log-out"></i> <span>Logout</span></a></li>
          

@@ -1,5 +1,6 @@
 <?php
 include 'customer_do_list.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +60,7 @@ include 'customer_do_list.php';
     <div class="d-flex flex-column">
       <div class="profile">
         <img src="" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><?php echo $user_data1['first_name'].' '.$user_data1['last_name'] ;?></a></h1>
+        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name'].' '.$user_data['last_name'] ;?></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -83,32 +84,30 @@ include 'customer_do_list.php';
 
   <main id="main">
     <section id="about" class="about">
-      <div class="container">
-        <h3>Previous Works</h3>
-
-        <div class="customer-card">
-          <?php if (!empty($customers)) {
-            foreach ($customers as $customer) {
-          ?>
-              <p>ON DATE: <?php echo $customer['date']; ?></p>
-              <p class="customer-info">Customer ID: <?php echo $customer['id']; ?>, Name: <?php echo $customer['name'] . " " . $customer['last']; ?></p>
-              <p class="customer-info">Email: <?php echo $customer['email']; ?>, Phone: <?php echo $customer['phone']; ?></p>
-              <p class="customer-info">Place: <?php echo $customer['place']; ?></p>
-              <p class="customer-info">Date: <?php echo $customer['date']; ?></p>
-              <div class="customer_action-buttons">
-                <form>
-                  <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
-                  <input type="hidden" name="customer_id" value="<?php echo $customer['id']; ?>">
-                  <button type="button" class="btn btn-primary open-modal-btn" data-bs-toggle="modal" data-bs-target="#ratingModal">Rate Us</button>
-                </form>
-              </div>
-          <?php
-            }
-          } else {
-            echo "No work found.";
-          } ?>
+    <div class="container">
+  <?php if (!empty($customers)) {
+    foreach ($customers as $customer) {
+  ?>
+      <div class="customer-card">
+        <p>ON DATE: <?php echo $customer['date']; ?></p>
+        <p class="customer-info">Contractor ID: <?php echo $customer['id']; ?>, Name: <?php echo $customer['name'] . " " . $customer['last']; ?></p>
+        <p class="customer-info">Email: <?php echo $customer['email']; ?>, Phone: <?php echo $customer['phone']; ?></p>
+        <p class="customer-info">Place: <?php echo $customer['place']; ?></p>
+        <p class="customer-info">Date: <?php echo $customer['date']; ?></p>
+        <div class="customer_action-buttons">
+          <form>
+            <input type="hidden" name="contractor_id" value="<?php echo $customer['id']; ?>">
+            <input type="hidden" name="customer_id" value="<?php echo $customerid; ?>">
+            <button type="button" class="btn btn-primary open-modal-btn" data-bs-toggle="modal" data-bs-target="#ratingModal">Rate Us</button>
+          </form>
         </div>
       </div>
+  <?php
+    }
+  } else {
+    echo "No work found.";
+  } ?>
+</div>
     </section>
   </main>
 
@@ -130,8 +129,8 @@ include 'customer_do_list.php';
             <span class="star" data-value="5">&#9733;</span>
           </div>
           <p id="selectedRatingText">Selected Rating: <span id="selectedRating">0</span></p>
-          <label for="review">Type your review:</label>
-          <textarea id="review" name="review" rows="4" cols="50"></textarea>
+          <!-- <label for="review">Type your review:</label>
+          <textarea id="review" name="review" rows="4" cols="50"></textarea> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -146,36 +145,68 @@ include 'customer_do_list.php';
 
   <!-- Your custom script -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var openModalBtns = document.querySelectorAll('.open-modal-btn');
-      var ratingModal = new bootstrap.Modal(document.getElementById('ratingModal'));
-      var ratingStars = document.querySelectorAll('.rating .star');
-      var selectedRatingText = document.getElementById('selectedRatingText');
-      var selectedRatingValue = document.getElementById('selectedRating');
-      var reviewTextarea = document.getElementById('review');
+  document.addEventListener('DOMContentLoaded', function () {
+    var openModalBtns = document.querySelectorAll('.open-modal-btn');
+    var ratingModal = new bootstrap.Modal(document.getElementById('ratingModal'));
+    var ratingStars = document.querySelectorAll('.rating .star');
+    var selectedRatingText = document.getElementById('selectedRatingText');
+    var selectedRatingValue = document.getElementById('selectedRating');
+    // var reviewTextarea = document.getElementById('review');
+    var submitRatingBtn = document.getElementById('submitRating');
 
-      ratingStars.forEach(function (star) {
-        star.addEventListener('click', function () {
-          var value = parseInt(star.getAttribute('data-value'));
-          updateSelectedRating(value);
-        });
-      });
-
-      function updateSelectedRating(value) {
-        selectedRatingValue.textContent = value;
-        selectedRatingText.classList.add('selected');
-      }
-
-      openModalBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          // Reset the selected rating and review when the modal is opened
-          updateSelectedRating(0);
-          reviewTextarea.value = '';
-          ratingModal.show();
-        });
+    ratingStars.forEach(function (star) {
+      star.addEventListener('click', function () {
+        var value = parseInt(star.getAttribute('data-value'));
+        updateSelectedRating(value);
       });
     });
-  </script>
+
+    function updateSelectedRating(value) {
+      selectedRatingValue.textContent = value;
+      selectedRatingText.classList.add('selected');
+    }
+
+    openModalBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        // Reset the selected rating and review when the modal is opened
+        updateSelectedRating(0);
+        reviewTextarea.value = '';
+        ratingModal.show();
+      });
+    });
+
+    submitRatingBtn.addEventListener('click', function () {
+  // Assuming the form has an action attribute set to rating_submit.php
+  // and method attribute set to POST
+  var form = document.createElement('form');
+  form.action = 'rating_submit.php';
+  form.method = 'post';
+
+  var contractorIdInput = document.createElement('input');
+  contractorIdInput.type = 'hidden';
+  contractorIdInput.name = 'contractor_id';
+  contractorIdInput.value = '<?php echo $customer['id']; ?>';
+
+  var customerIdInput = document.createElement('input');
+  customerIdInput.type = 'hidden';
+  customerIdInput.name = 'customer_id';
+  customerIdInput.value = '<?php echo $customerid ?>';
+
+  var ratingInput = document.createElement('input');
+  ratingInput.type = 'hidden';
+  ratingInput.name = 'rating';
+  ratingInput.value = selectedRatingValue.textContent;
+
+  form.appendChild(contractorIdInput);
+  form.appendChild(customerIdInput);
+  form.appendChild(ratingInput);
+
+  document.body.appendChild(form);
+  form.submit();
+});
+
+  });
+</script>
 
 </body>
 
