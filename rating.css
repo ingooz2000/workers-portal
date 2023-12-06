@@ -1,0 +1,75 @@
+/* Style for the modal */
+#ratingModal {
+  font-family: 'Arial', sans-serif;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  background-color: #007bff;
+  color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* Style for the rating stars */
+.rating {
+  font-size: 24px;
+}
+
+.star {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.star:before {
+  content: '\2605'; /* Unicode character for a solid star */
+  color: #ffc107; /* Star color */
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.star:hover:before,
+.star:hover ~ .star:before {
+  color: #ffca28; /* Highlight stars on hover */
+}
+
+.star.selected:before,
+.star.selected ~ .star:before {
+  color: #ffca28; /* Keep selected stars highlighted */
+}
+
+/* Style for the modal footer buttons */
+.modal-footer {
+  border-top: 1px solid #ddd;
+}
+
+.btn-secondary,
+.btn-primary {
+  transition: background-color 0.3s;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #007bff; /* Hover/focus background color */
+  border-color: #007bff; /* Hover/focus border color */
+}
+
+.btn-primary {
+  background-color: #ffc107; /* Primary button background color */
+  border-color: #ffc107; /* Primary button border color */
+}
+
+/* Add more custom styles as needed */

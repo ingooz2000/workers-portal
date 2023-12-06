@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mysqli_query($con, $update4);
                 // echo "Status updated to finished successfully for request ID {$select3['id']}<br>";
                 $update5 = "UPDATE contractor SET flag=0 WHERE contractor.coid='$contractorId'";
+                mysqli_query($con, $update5);
                 header("location:contractorhome.php");
             }
         } else {

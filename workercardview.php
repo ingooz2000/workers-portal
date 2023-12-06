@@ -115,7 +115,7 @@ $_SESSION['worker_id'] = $workerid;
                     <div class="col-lg-5">
                         <div class="candidate-list-content mt-3 mt-lg-0">
                             <h5 class="fs-19 mb-0">
-                            <a class="primary-link" href="#"><?php echo $contractor['firstname'].''.$contractor['secondname']?></a>  <span class="rating-box"><i class="mdi mdi-star align-middle"></i>4.8</span>
+                            <a class="primary-link" href="#"><?php echo $contractor['firstname'].' '.$contractor['secondname']?></a>  <span class="rating-box"><i class="mdi mdi-star align-middle"></i>4.8</span>
                             </h5>
                             <p class="text-muted mb-2">Type Of Work:<?php echo $contractor['type'];?></p>
                             <ul class="list-inline mb-0 text-muted">

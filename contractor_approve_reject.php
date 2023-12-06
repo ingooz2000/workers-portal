@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $update = "UPDATE contractor_requests SET status='approved' WHERE id={$select['id']}";
                 mysqli_query($con, $update);
                 // echo "Status updated to approved successfully for request ID {$select['id']}<br>";
-                header("location:contractorhome.php");
+                echo '<script type="text/javascript"> alert("Request Approved")</script>';
+                header("Refresh:0.5;url=contractorhome.php");
             }
         } else {
             echo "Query error: " . mysqli_error($con);
@@ -33,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mysqli_query($con, $update2);
                 mysqli_query($con, $update3);
                 // echo "Status updated to reject successfully for request ID {$select2['id']}<br>";
-
-                header("location:contractorhome.php");
+                echo '<script type="text/javascript"> alert("Request Rejected")</script>';
+                header("Refresh:0.5;url=contractorhome.php");
             }
         } else {
             echo "Query error: " . mysqli_error($con);
