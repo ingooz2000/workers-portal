@@ -68,7 +68,7 @@ include 'adminselection.php';
         <li><a href="admin_contractor_list.php"><i class="bx bx-file-blank"></i> <span>Contractors</span></a></li>
         <li><a href="admin_customer_list.php"><i class="bx bx-file-blank"></i> <span>Customer</span></a></li>
         <li><a href="admin_worker_list.php"><i class="bx bx-file-blank"></i> <span>Worker</span></a></li>
-        <li><a href="adminedit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
+        
         <li><a href="logout.php"><i class="bx bx-log-out"></i> <span>Logout</span></a></li>
        
       </ul>
@@ -81,10 +81,10 @@ include 'adminselection.php';
     <div class="container">
 
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-4">
-                    <label for="filterInput">Filter worker:</label>
+                    <label for="filterInput">Search worker:</label>
                     <div class="styled-select">
                         <input type="text" id="filterInput" name="filterInput" placeholder="Type to filter">
-                        <button type="submit">Filter</button>
+                        <button type="submit">Search</button>
                     </div>
                 </form>
 
@@ -128,7 +128,7 @@ include 'adminselection.php';
                             </ul>
                             <form action="worker_remove.php" method="post">
                             <input type="hidden" name="worker_id" value="<?php echo $worker['id']; ?>">
-                            <button type="submit" class="btn btn-primary mt-3" name="remove" value="remove">Remove </button>
+                            <button type="submit" class="btn btn-primary mt-3" name="action" value="remove">Remove </button>
                             </form>
 
                             

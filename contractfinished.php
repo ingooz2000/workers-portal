@@ -13,38 +13,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contractorId = mysqli_real_escape_string($con, $contractorId);
 
     if ($action === 'finished') {
-        // Perform actions for finishing
-        $query = "UPDATE contractor_requests SET status='Finished' WHERE coid='$contractorId' AND cid='$customerId'";
+        $query3 = "SELECT * FROM contractor_requests WHERE coid=$contractorId AND cid=$customerId AND status='approved'";
+        $checkquery3 = mysqli_query($con, $query3);
 
-        // Execute the query
-        if ($con->query($query) === TRUE) {
-            // Query executed successfully
-            $flagQuery = "UPDATE contractor SET flag = 0 WHERE coid=$contractorId";
-
-            // Execute the second query
-            // if ($con->query($flagQuery) === TRUE) {
-            //     Second query executed successfully
-            //     echo "<script type='text/javascript'> 
-            //             alert('Updated Successfully');
-            //             setTimeout(function(){
-            //                 window.location.href = 'contractorhome.php';
-            //             }, 3000);
-            //           </script>";
-            //     exit();  // Don't forget to exit after redirecting
-             else {
-                // Handle the error for the second query
-                echo "Error updating flag: " . $con->error;
+        if ($checkquery3) {
+            while ($select3 = mysqli_fetch_assoc($checkquery3)) {
+                $update4 = "UPDATE contractor_requests SET status='finished' WHERE id={$select3['id']}";
+                mysqli_query($con, $update4);
+                // echo "Status updated to finished successfully for request ID {$select3['id']}<br>";
+                $update5 = "UPDATE contractor SET flag=0 WHERE contractor.coid='$contractorId'";
+                header("location:contractorhome.php");
             }
         } else {
-            // Handle the error for the first query
-            echo "Error updating status: " . $con->error;
+            echo "Query error: " . mysqli_error($con);
         }
-    }
-    header("Location: contractorhome.php");
-exit();
-} 
 
-// Handle other types of requests or redirect
-header("Location: contractorhome.php");
-exit();
+    } else {
+        // Handle the error for the action
+        echo "Invalid action";
+    }
+}
 ?>

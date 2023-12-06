@@ -56,7 +56,7 @@
           
           <li><a href="customerhome.php" ><i class="bx bx-home"></i> <span>About</span></a></li>
           <li><a href="cardview.php" ><i class="bx bx-file-blank"></i> <span>Contractors</span></a></li>
-          <li><a href="#portfolio" ><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
+          <li><a href="customer_projects.php" ><i class="bx bx-book-content"></i> <span>Previous Projects</span></a></li>
           <li><a href="customeredit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
           <li><a href="logout.php"><i class="bx bx-log-out"></i> <span>Logout</span></a></li>
          

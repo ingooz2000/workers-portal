@@ -35,12 +35,20 @@ $_SESSION['customer_id'] = $customerid;
 
   <!-- Template Main CSS File -->
   <link rel="stylesheet" href="cardview.css">
-    <link href="styleindex.css" rel="stylesheet">
+  <link href="styleindex.css" rel="stylesheet">
+
+  <!-- Add these script tags to include jQuery and jQuery UI -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
   </head>
     
 
 <body>
+
+
   
      <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
@@ -66,7 +74,7 @@ $_SESSION['customer_id'] = $customerid;
         
         <li><a href="customerhome.php" ><i class="bx bx-home"></i> <span>About</span></a></li>
         <li><a href="cardview.php"><i class="bx bx-file-blank"></i> <span>Contractors</span></a></li>
-        <li><a href="#portfolio" ><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
+        <li><a href="customer_projects.php" ><i class="bx bx-book-content"></i> <span>Previous Projects</span></a></li>
         <li><a href="customeredit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
         <li><a href="logout.php"><i class="bx bx-log-out"></i> <span>Logout</span></a></li>
        
@@ -83,6 +91,7 @@ $_SESSION['customer_id'] = $customerid;
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-4">
                     <label for="filterInput">Filter Contractors:</label>
                     <div class="styled-select">
+                      
                         <input type="text" id="filterInput" name="filterInput" placeholder="Type to filter">
                         <button type="submit">Filter</button>
                     </div>
@@ -115,7 +124,7 @@ $_SESSION['customer_id'] = $customerid;
                     <div class="col-lg-5">
                         <div class="candidate-list-content mt-3 mt-lg-0">
                             <h5 class="fs-19 mb-0">
-                            <a class="primary-link" href="#"><?php echo $contractor['name']?></a>  <span class="rating-box"><i class="mdi mdi-star align-middle"></i>4.8</span>
+                            <a class="primary-link" href="#"><?php echo $contractor['firstname'].''.$contractor['secondname']?></a>  <span class="rating-box"><i class="mdi mdi-star align-middle"></i>4.8</span>
                             </h5>
                             <p class="text-muted mb-2">Type Of Work:<?php echo $contractor['type'];?></p>
                             <ul class="list-inline mb-0 text-muted">
@@ -123,10 +132,13 @@ $_SESSION['customer_id'] = $customerid;
                                 <li class="list-inline-item"><i class="mdi mdi-wallet"></i> Contact:<?php echo $contractor['phone'];?></li>
                                 <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Mail:<?php echo $contractor['email'];?></li>
                             </ul>
-                            <form action="request_contractor.php" method="post">
-                            <input type="hidden" name="contractor_id" value="<?php echo $contractor['id']; ?>">
-                            <button type="submit" class="btn btn-primary mt-3" name="submit_request">Request Service</button>
-                            </form>
+                            <form id="requestForm" action="request_contractor.php" value="<?php echo $contractor['id']; ?>" method="post">
+                        <input type="hidden" name="selected_date" class="datepicker">
+                        <input type="hidden" name="contractor_id" value="<?php echo $contractor['id']; ?>">
+                        <button type="button" class="btn btn-primary mt-3" onclick="showDatePicker(<?php echo $contractor['id']; ?>)">Select Date</button>
+                        <button type="submit" class="btn btn-primary mt-3" name="submit_request">Request Service</button>
+                      </form>
+
 
                             
                         </div>
@@ -140,5 +152,20 @@ $_SESSION['customer_id'] = $customerid;
    </section>
 
   </main>
+
+  <script>
+    $(document).ready(function() {
+      // Initialize datepicker
+      $(".datepicker").datepicker({
+        dateFormat: 'yy-mm-dd', // Set the desired date format
+        minDate: 0 // Restrict date selection to future dates
+      });
+
+      // Function to show datepicker on button click
+      window.showDatePicker = function() {
+        $(".datepicker").datepicker("show");
+      };
+    });
+  </script>
 </body>
 </html>

@@ -22,8 +22,8 @@
 
             mysqli_query($con, $query) or die(mysqli_error($con));
 
-            echo "<script type='text/javascript'> alert('Successfully Entered')</script>";
-            header("location:workeredit.php");
+            echo "<script type='text/javascript'> alert('Updated Successfully ')</script>";
+            header("Refresh:0.5;url=workeredit.php");
 
         }
         else

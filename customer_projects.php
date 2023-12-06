@@ -1,4 +1,6 @@
-
+<?php
+include 'customer_do_list.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +44,7 @@
 
       <div class="profile">
         <img src="" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><?php include 'customer_profilename.php';echo $user_data1['first_name'] ?></a></h1>
+        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name'] ?></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -66,17 +68,15 @@
       </nav><!-- .nav-menu -->
     </div>
   </header>
+  
 
   <main id="main">
+    
 
   <section id="about" class="about">
     <div class="container">
 
-      <div class="section-title">
-        <h2>About</h2>
-        <p></p>
-      </div>
-
+     
       <div class="row">
         <div class="col-lg-4" data-aos="fade-right">
           <img src="assets/img/profile-img.jpg" class="img-fluid" alt="">
@@ -91,11 +91,38 @@
               <ul>
                 
               
-                <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <span><?php echo $user_data1['first_name'] ?></span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span><?php echo $user_data1['email'] ?></span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span><?php echo $user_data1['phone'] ?></span></li>
                
               </ul>
+
+              <div class="customer-card">
+    <?php if (!empty($customers)) {
+    // The array is not empty, process the data
+    foreach($customers as $customer){
+    
+    
+  
+         ?>
+        <p class="customer-info">Customer ID: <?php echo $customer['id']; ?>, Name: <?php echo $customer['name'] . " " . $customer['last']; ?></p>
+        <p class="customer-info">Email: <?php echo $customer['email']; ?>, Phone: <?php echo $customer['phone']; ?></p>
+        <p class="customer-info">Place: <?php echo $customer['place']; ?></p>
+        <p class="customer-info">Date: <?php echo $customer['date']; ?>, ID: <?php echo $customer['id']; ?></p>
+        <div class="customer_action-buttons">
+            <form action="rating.php" method="post">
+                <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
+                <input type="hidden" name="customer_id" value="<?php echo $customer['id']; ?>">
+                <button type="submit" name="action" value="approve">Rate Us</button>
+            </form>
+
+            <!-- <form action="contractor_approve_reject.php" method="post">
+                <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
+                <input type="hidden" name="customer_id" value="<?php echo $customer['id']; ?>">
+                <button type="submit" name="action" value="reject">Reject</button>
+            </form> -->
+        </div>
+    <?php }}else {
+      // The array is empty
+      echo "No work  found.";} ?>
+</div>
             </div>
             
           </div>

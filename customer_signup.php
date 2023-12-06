@@ -1,4 +1,7 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
     session_start();
 
     include("db.php");
@@ -21,13 +24,14 @@
             mysqli_query($con, $query) or die(mysqli_error($con));
 
             echo "<script type='text/javascript'> alert('Successfully Register')</script>";
-            header("Refresh 0.5: url=login.html");
+            header("Refresh: 0.5;url=login.html");
 
 
         }
         else
         {
-            echo "<script type='text/javascript'> alert('Please Enter some valid information')</script>";
+            echo "<script type='text/javascript'> alert('Please Enter  All Details')</script>";
+            header("Refresh: 0.5;url=customer_signup.html");
         
         }
 

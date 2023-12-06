@@ -68,7 +68,7 @@ include 'adminselection.php';
         <li><a href="admin_contractor_list.php"><i class="bx bx-file-blank"></i> <span>Contractors</span></a></li>
         <li><a href="admin_customer_list.php"><i class="bx bx-file-blank"></i> <span>Customer</span></a></li>
         <li><a href="admin_worker_list.php"><i class="bx bx-file-blank"></i> <span>Worker</span></a></li>
-        <li><a href="adminedit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
+       
         <li><a href="logout.php"><i class="bx bx-log-out"></i> <span>Logout</span></a></li>
        
       </ul>

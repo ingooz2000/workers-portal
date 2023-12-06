@@ -28,7 +28,7 @@ if (isset($_SESSION['contractor_id'])) {
     // Check if the user is a contractor
     $contractor2_id = $_SESSION['contractor_id'];
 
-    $query = "SELECT contractor_requests.id, customer.first_name, customer.last_name,customer.email,customer.phone,customer.place,customer.cid
+    $query = "SELECT contractor_requests.id,contractor_requests.selected_date, customer.first_name, customer.last_name,customer.email,customer.phone,customer.place,customer.cid
               FROM contractor_requests
               INNER JOIN customer ON contractor_requests.cid = customer.cid
               WHERE contractor_requests.coid = $contractor2_id AND contractor_requests.status='pending'";
@@ -38,6 +38,7 @@ if (isset($_SESSION['contractor_id'])) {
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $customerdata = array(
+                'date' => $row['selected_date'],
                 'name' => $row['first_name'],
                 'last' => $row['last_name'],
                 'email' => $row['email'],
@@ -64,7 +65,7 @@ if (isset($_SESSION['contractor_id'])) {
     // Check if the user is a contractor
     $contractor2_id = $_SESSION['contractor_id'];
 
-$query2 = "SELECT contractor_requests.id, customer.first_name, customer.last_name,customer.email,customer.phone,customer.place,customer.cid
+$query2 = "SELECT contractor_requests.id,contractor_requests.selected_date, customer.first_name, customer.last_name,customer.email,customer.phone,customer.place,customer.cid
 FROM contractor_requests
 INNER JOIN customer ON contractor_requests.cid = customer.cid
 WHERE contractor_requests.coid = $contractor2_id AND contractor_requests.status='approved'";
@@ -74,6 +75,7 @@ $result2 = mysqli_query($con, $query2);
 if ($result2 && mysqli_num_rows($result2) > 0) {
 while ($row = mysqli_fetch_assoc($result2)) {
   $customerdata = array(
+      'date' => $row['selected_date'],
       'name' => $row['first_name'],
       'last' => $row['last_name'],
       'email' => $row['email'],

@@ -50,7 +50,7 @@ include 'workerapprove.php';
 
       <div class="profile">
         <img src="" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name'] .' '. $user_data['coid']; ?></a></h1>
+        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name'] .' '. $user_data['last_name']; ?></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>

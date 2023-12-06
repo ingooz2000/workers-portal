@@ -43,7 +43,7 @@
 
             <div class="profile">
                 <img src="" alt="" class="img-fluid rounded-circle">
-                <h1 class="text-light"><a href="index.html"><?php include 'customer_profilename.php';echo $user_data1['first_name'] ?></a></h1>
+                <h1 class="text-light"><a href="index.html"><?php include 'customer_profilename.php';echo $user_data['first_name'] ?></a></h1>
                 <div class="social-links mt-3 text-center">
                     <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
                     <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -98,34 +98,34 @@
                         continue;
                     }
                 ?>
-                    <div class="candidate-list-box ">
+                    <!-- <div class="candidate-list-box ">
                         <div class="p-4 card-body">
                             <div class="align-items-center row">
                                 <div class="col-auto">
 
                                     <div class="card-body">
                                         <img src="">
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <div class="candidate-list-content mt-3 mt-lg-0">
-                                            <h5 class="fs-19 mb-0">
-                                                <a class="primary-link" href="#"><?php echo $contractor['name'] ?></a> <span
-                                                    class="rating-box"><i
-                                                        class="mdi mdi-star align-middle"></i>4.8</span>
+                                    </div> -->
+                                    <div class="contractor-card">
+                                   
+                                                <p class="contractor-info" href="#"><?php echo $contractor['name'] ?></p> 
+                                                    
+                                            
+                                                        <i class="mdi mdi-star align-middle"></i>4.8</span>
                                             </h5>
                                             <p class="text-muted mb-2">Type Of Work:<?php echo $contractor['type']; ?></p>
-                                            <ul class="list-inline mb-0 text-muted">
-                                                <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Place:<?php echo $contractor['place']; ?></li>
-                                                <li class="list-inline-item"><i class="mdi mdi-wallet"></i> Contact:<?php echo $contractor['phone']; ?></li>
-                                                <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Mail:<?php echo $contractor['email']; ?></li>
-                                            </ul>
+                                            
+                                                <p class= "contractor-info"> Place:<?php echo $contractor['place']; ?></p>
+                                                <p class= "contractor-info">Contact:<?php echo $contractor['phone']; ?></p>
+                                                <p class= "contractor-info">Mail:<?php echo $contractor['email']; ?></p>
+                                            
 
                                             
                                         </div>
-                                    </div>
+                                    <!-- </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 <?php } ?>
 

@@ -27,7 +27,8 @@
         }
         else
         {
-            echo "<script type='text/javascript'> alert('Please Enter some valid information')</script>";
+            echo "<script type='text/javascript'> alert('Please Enter All  Details')</script>";
+            header("Refresh:0.5; worker_signup.html");
         
         }
 

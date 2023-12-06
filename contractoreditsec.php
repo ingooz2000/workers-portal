@@ -13,17 +13,23 @@
         $place=$_POST['place'];
         $type=$_POST['type'];
         
-        if(!empty($name) && $type!="select")
+        if(!empty($name) )
         {
-            $query = "UPDATE contractor
-           SET first_name = '$name',last_name='$secname',email='$gmail', phone = '$phone',address='$address',place='$place', type = '$type'
-          WHERE email = '$gmail'";
+            if($type!='select'){
+                $query = "UPDATE contractor
+            SET first_name = '$name',last_name='$secname',email='$gmail', phone = '$phone',address='$address',place='$place', type = '$type'
+            WHERE email = '$gmail'";
 
 
             mysqli_query($con, $query) or die(mysqli_error($con));
 
             echo "<script type='text/javascript'> alert('Updated Successfully ')</script>";
-            header("location:contractoredit.php");
+            header("Refresh:0.5;url=contractoredit.php");
+            }
+            else{
+                echo "<script type='text/javascript'> alert('Select New Or Existing Work Type ')</script>";
+            header("Refresh:0.5;url=contractoredit.php");
+            }
 
         }
         else

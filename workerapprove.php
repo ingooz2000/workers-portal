@@ -49,9 +49,9 @@ if (isset($_SESSION['contractor_id'])) {
             // Append the array to the $contractors array
             $workerspen[] = $workerdata;
 
-                    echo "Approval Requests Data: ";
-                    print_r($workerspen);
-                    echo "<br>";
+                    // echo "Approval Requests Data: ";
+                    // print_r($workerspen);
+                    // echo "<br>";
         }
     }
 }
@@ -88,4 +88,21 @@ if (isset($_SESSION['contractor_id'])) {
     //     exit();
     // }
 }
+
+// Function to compare arrays based on the 'email' key
+function compareByEmail($a, $b) {
+    return strcmp($a['email'], $b['email']);
+}
+
+// Remove duplicates and sort $workerspen
+$workerspen = array_values(array_unique($workerspen, SORT_REGULAR));
+usort($workerspen, 'compareByEmail');
+
+// Remove duplicates and sort $workersapp
+$workersapp = array_values(array_unique($workersapp, SORT_REGULAR));
+usort($workersapp, 'compareByEmail');
+
+
 ?>
+
+

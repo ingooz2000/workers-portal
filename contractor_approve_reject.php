@@ -3,57 +3,44 @@ session_start();
 include("db.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $customerId = $_POST['customer_id'];
-    $action = $_POST['action'];
-    $contractorId = $_POST['contractor_id'];
+    $customerId = mysqli_real_escape_string($con, $_POST['customer_id']);
+    $action = mysqli_real_escape_string($con, $_POST['action']);
+    $contractorId = mysqli_real_escape_string($con, $_POST['contractor_id']);
 
-    // Validate and sanitize inputs
-    $customerId = mysqli_real_escape_string($con, $customerId);
-    $action = mysqli_real_escape_string($con, $action);
-    $contractorId = mysqli_real_escape_string($con, $contractorId);
+    if ($action === 'approve') {
+        $query = "SELECT * FROM contractor_requests WHERE coid=$contractorId AND cid=$customerId AND status='pending'";
+        $checkquery = mysqli_query($con, $query);
 
-    if (strtolower($action) === 'approve') {
-        // Debug: Echo the values for troubleshooting
-        echo "Contractor ID: $contractorId, Customer ID: $customerId, Action: Approve";
-
-        // Perform actions for approval
-        $query = "UPDATE contractor_requests SET status='approved' WHERE coid='$contractorId' AND cid='$customerId'";
-        
-    } elseif (strtolower($action) === 'reject') {
-        // Debug: Echo the values for troubleshooting
-        echo "Contractor ID: $contractorId, Customer ID: $customerId, Action: Reject";
-
-        // Perform actions for rejection
-        $query = "UPDATE contractor_requests SET status='reject' WHERE coid='$contractorId' AND cid='$customerId'";
-
-        // Also update the flag to 0 for "reject" action
-        $flagQuery = "UPDATE contractor SET flag = 0 WHERE coid=$contractorId";
-    }
-
-    // Debug: Echo the query for troubleshooting
-    echo "Query: $query";
-
-    // Execute the query
-    if ($con->query($query) === TRUE) {
-        // Query executed successfully
-
-        if (isset($flagQuery) && $con->query($flagQuery) !== TRUE) {
-            // Handle the error for the flag update query
-            echo "Error updating flag: " . $con->error;
+        if ($checkquery) {
+            while ($select = mysqli_fetch_assoc($checkquery)) {
+                $update = "UPDATE contractor_requests SET status='approved' WHERE id={$select['id']}";
+                mysqli_query($con, $update);
+                // echo "Status updated to approved successfully for request ID {$select['id']}<br>";
+                header("location:contractorhome.php");
+            }
+        } else {
+            echo "Query error: " . mysqli_error($con);
         }
 
-        echo ucfirst($action) . " successful!";
-    } else {
-        // Handle the error for the main query
-        echo "Error updating status: " . $con->error;
-    }
+    } elseif ($action === 'reject') {
+        $query2 = "SELECT * FROM contractor_requests WHERE coid=$contractorId AND cid=$customerId AND status='pending'";
+        $checkquery2 = mysqli_query($con, $query2);
 
-    // Redirect to the original page or perform any other action
-    header("Location: contractorhome.php");
-    exit();
-} else {
-    // Handle other types of requests or redirect
-    header("Location: contractorhome.php");
-    exit();
+        if ($checkquery2) {
+            while ($select2 = mysqli_fetch_assoc($checkquery2)) {
+                $update2 = "UPDATE contractor_requests SET status='rejected' WHERE id={$select2['id']}";
+                $update3 = "UPDATE contractor SET flag = 0 WHERE coid=$contractorId";
+                mysqli_query($con, $update2);
+                mysqli_query($con, $update3);
+                // echo "Status updated to reject successfully for request ID {$select2['id']}<br>";
+
+                header("location:contractorhome.php");
+            }
+        } else {
+            echo "Query error: " . mysqli_error($con);
+        }
+    } else {
+        echo "Invalid action";
+    }
 }
 ?>

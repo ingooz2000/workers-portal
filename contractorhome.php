@@ -116,7 +116,8 @@ include 'contractorapprove.php';
          ?>
         <p class="customer-info">Customer ID: <?php echo $customer['id']; ?>, Name: <?php echo $customer['name'] . " " . $customer['last']; ?></p>
         <p class="customer-info">Email: <?php echo $customer['email']; ?>, Phone: <?php echo $customer['phone']; ?></p>
-        <p class="customer-info">Place: <?php echo $customer['place']; ?>, ID: <?php echo $customer['id']; ?></p>
+        <p class="customer-info">Place: <?php echo $customer['place']; ?></p>
+        <p class="customer-info">Date: <?php echo $customer['date']; ?>, ID: <?php echo $customer['id']; ?></p>
         <div class="customer_action-buttons">
             <form action="contractor_approve_reject.php" method="post">
                 <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
@@ -145,8 +146,9 @@ include 'contractorapprove.php';
          ?>
         <p class="customer-info">Customer ID: <?php echo $customer2['id']; ?>, Name: <?php echo $customer2['name'] . " " . $customer2['last']; ?></p>
         <p class="customer-info">Email: <?php echo $customer2['email']; ?>, Phone: <?php echo $customer2['phone']; ?></p>
-        <p class="customer-info">Place: <?php echo $customer2['place']; ?>, ID: <?php echo $customer2['id']; ?></p>
-        <div class="customer_action-buttons">
+        <p class="customer-info">Place: <?php echo $customer2['place']; ?></p> 
+        <p class="customer-info">Date: <?php echo $customer2['date']; ?></p>
+        <p class="customer-info">ID: <?php echo $customer2['id']; ?></p>
             <form action="contractfinished.php" method="post">
                 <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
                 <input type="hidden" name="customer_id" value="<?php echo $customer2['id']; ?>">
