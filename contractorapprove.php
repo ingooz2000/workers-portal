@@ -86,7 +86,7 @@ while ($row = mysqli_fetch_assoc($result2)) {
   );
 
   $customeracc[] = $customerdata;
-  print_r($customeracc);
+//   print_r($customeracc);
   
 }
 
@@ -95,5 +95,44 @@ while ($row = mysqli_fetch_assoc($result2)) {
 // echo "<br>";
 }
 }
+
+
+if (isset($_SESSION['contractor_id'])) {
+    // Check if the user is a contractor
+    $customerid = $_SESSION['contractor_id'];
+
+$query3 = "SELECT contractor_requests.id,contractor_requests.selected_date,contractor_requests.completed_date, customer.first_name, customer.last_name,customer.email,customer.phone,customer.place,customer.cid
+FROM contractor_requests
+INNER JOIN customer ON contractor_requests.cid = customer.cid
+WHERE   contractor_requests.status='finished'";
+
+$result3 = mysqli_query($con, $query3);
+
+if ($result3 && mysqli_num_rows($result3) > 0) {
+while ($row = mysqli_fetch_assoc($result3)) {
+  $customerdata = array(
+      'date' => $row['selected_date'],
+      'cdate' => $row['completed_date'],
+      'name' => $row['first_name'],
+      'last' => $row['last_name'],
+      'email' => $row['email'],
+      'phone' => $row['phone'],
+      'place' => $row['place'],
+      'id' => $row['cid']
+  );
+
+  $customersc[] = $customerdata;
+  
+}
+// print_r($customersc);
+
+// Debug: Display approval requests data
+// print_r($customeracc);
+// echo "<br>";
+} else{
+
+}
+}
+
 
 ?>

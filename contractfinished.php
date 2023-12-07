@@ -7,6 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'];
     $contractorId = $_POST['contractor_id'];
 
+    $selectedDate = isset($_POST['selected_date']) ? $_POST['selected_date'] : '';
+
     // Validate and sanitize inputs
     $customerId = mysqli_real_escape_string($con, $customerId);
     $action = mysqli_real_escape_string($con, $action);
@@ -18,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($checkquery3) {
             while ($select3 = mysqli_fetch_assoc($checkquery3)) {
-                $update4 = "UPDATE contractor_requests SET status='finished' WHERE id={$select3['id']}";
+                $update4 = "UPDATE contractor_requests SET status='finished', completed_date='$selectedDate' WHERE id={$select3['id']}";
                 mysqli_query($con, $update4);
                 // echo "Status updated to finished successfully for request ID {$select3['id']}<br>";
                 $update5 = "UPDATE contractor SET flag=0 WHERE contractor.coid='$contractorId'";

@@ -1,8 +1,10 @@
-<?php 
-include 'workerapprove.php';
-// include 'approve_worker.php';
+<?php
+include 'contractorapprove.php';
 
+  
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +24,7 @@ include 'workerapprove.php';
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="home/vendor/aos/aos.css" rel="stylesheet">
+  <!-- <link href="home/vendor/aos/aos.css" rel="stylesheet"> -->
   <link href="home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="home/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="home/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -36,10 +38,7 @@ include 'workerapprove.php';
   </head>
 
 <body>
-
-
-
-
+  <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id;?>">
 
   <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
@@ -50,7 +49,7 @@ include 'workerapprove.php';
 
       <div class="profile">
         <img src="" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name'] .' '. $user_data['last_name']; ?></a></h1>
+        <h1 class="text-light"><a href="index.html"><?php echo $user_data['first_name'].' '.$user_data['last_name']; ?></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -65,55 +64,45 @@ include 'workerapprove.php';
           
           <li><a href="contractorhome.php" ><i class="bx bx-home"></i> <span>About</span></a></li>
           <li><a href="approved_worker.php"><i class="bx bx-file-blank"></i> <span>Approved Worker</span></a></li>
-          <li><a href="workers.php" ><i class="bx bx-file-blank"></i> <span>Workers</span></a></li>
+          <li><a href="workers.php"><i class="bx bx-file-blank"></i> <span>Workers</span></a></li>
           <li><a href="contractor_projects.php"><i class="bx bx-file-blank"></i> <span>Previous Works</span></a></li>
           <li><a href="contractoredit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
           <li><a href="logout.php"><i class="bx bx-log-out"></i> <span>Logout</span></a></li>
          
         </ul>
       </nav><!-- .nav-menu -->
-
-      
-
-    
-
     </div>
   </header>
+
   <main id="main">
+    <section id="about" class="about">
+      <div class="container">
 
-  <section id="about" class="about">
-    <div class="container">
-    
-    <!-- You can add a dropdown or handle notifications with JavaScript here -->
-  </div>
-  
+        <h2>Service Completed</h2>
+        <?php if (!empty($customersc)) {
+          // The array is not empty, process the data
+          foreach ($customersc as $customer2) {
+        ?>
 
-<h2>Approved Workers</h2>
-<?php
-    foreach ($workersapp as $workerapp) {
-        
-        
-  ?>
-
-  <div class="worker-card">
-    
-    <p class="worker-info">Worker ID: <?php echo $workerapp['id']; ?>, Name: <?php echo $workerapp['name'] . " " . $workerapp['last']; ?></p>
-    <p class="worker-info">Email: <?php echo $workerapp['email']; ?>, Phone: <?php echo $workerapp['phone'] ; ?></p>
-    <p class="worker-info">Place: <?php echo $workerapp['place']; ?>, ID: <?php echo $workerapp['id'] ; ?></p>
-   </div>
-
-
-  
-<?php
-    }
-?>
-
-
-</section>
-
-</main>
-<script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
-
+            
+            <div class="customer-card">
+            <h3> Completed On:<?php echo $customer2['cdate'];?></h2>
+              <p class="customer-info">Customer ID: <?php echo $customer2['id']; ?>, Name: <?php echo $customer2['name'] . " " . $customer2['last']; ?></p>
+              <p class="customer-info">Email: <?php echo $customer2['email']; ?></p>
+              <p class="customer-info">Phone: <?php echo $customer2['phone']; ?></p>
+              <p class="customer-info">Place: <?php echo $customer2['place']; ?></p>
+              <p class="customer-info">Date: <?php echo $customer2['date']; ?></p>
+              
+            </div>
+        <?php
+          }
+        } else {
+          echo 'No Work Done';
+        }
+        ?>
+      </div>
+    </section>
+  </main>
 
   
 </body>

@@ -43,6 +43,8 @@ $_SESSION['customer_id'] = $customerid;
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
+
+
   </head>
     
 
@@ -83,74 +85,58 @@ $_SESSION['customer_id'] = $customerid;
   </div>
 </header>
 <main id="main">
+    <section id="about" class="about">
+      <div class="container">
+        <!-- Add a form for filtering -->
+        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-4">
+          <label for="filterInput">Filter Contractors:</label>
+          <div class="styled-select">
+            <input type="text" id="filterInput" name="filterInput" placeholder="Type to filter">
+            <button type="submit">Filter</button>
+          </div>
+        </form>
 
-  <section id="about" class="about">
-    <div class="container">
+        <div class="contractor-card-container">
+          <?php
+          include("contractor_lists.php");
+          // Check if a filter term is provided
+          $filterTerm = isset($_POST['filterInput']) ? strtolower($_POST['filterInput']) : '';
 
-    <!-- Add a form for filtering -->
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-4">
-                    <label for="filterInput">Filter Contractors:</label>
-                    <div class="styled-select">
-                      
-                        <input type="text" id="filterInput" name="filterInput" placeholder="Type to filter">
-                        <button type="submit">Filter</button>
-                    </div>
-                </form>
-
-
-    <?php
-    include ("contractor_lists.php");
-    // Check if a filter term is provided
-    $filterTerm = isset($_POST['filterInput']) ? strtolower($_POST['filterInput']) : '';
-
-    foreach ($contractors as $contractor) {
-        // If a filter term is provided, check if the contractor matches the filter
-        // If not, skip to the next iteration of the loop
-        if ($filterTerm !== '' && stripos($contractor['type'], $filterTerm) === false) {
-            continue;
-        }
-  
-
-      
-    ?>
-    <div class="candidate-list-box ">
-        <div class="p-4 card-body">
-            <div class="align-items-center row">
-                <div class="col-auto">
-                   
-                    <div class="card-body">
-                        <img src="">
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="candidate-list-content mt-3 mt-lg-0">
-                            <h5 class="fs-19 mb-0">
-                            <a class="primary-link" href="#"><?php echo $contractor['firstname'].''.$contractor['secondname']?></a>  <span class="rating-box"><i class="mdi mdi-star align-middle"></i>4.8</span>
-                            </h5>
-                            <p class="text-muted mb-2">Type Of Work:<?php echo $contractor['type'];?></p>
-                            <ul class="list-inline mb-0 text-muted">
-                                <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Place:<?php echo $contractor['place'];?></li>
-                                <li class="list-inline-item"><i class="mdi mdi-wallet"></i> Contact:<?php echo $contractor['phone'];?></li>
-                                <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Mail:<?php echo $contractor['email'];?></li>
-                            </ul>
-                            <form id="requestForm" action="request_contractor.php" value="<?php echo $contractor['id']; ?>" method="post">
-                        <input type="hidden" name="selected_date" class="datepicker">
-                        <input type="hidden" name="contractor_id" value="<?php echo $contractor['id']; ?>">
-                        <button type="button" class="btn btn-primary mt-3" onclick="showDatePicker(<?php echo $contractor['id']; ?>)">Select Date</button>
-                        <button type="submit" class="btn btn-primary mt-3" name="submit_request">Request Service</button>
-                      </form>
-
-
-                            
-                        </div>
-                    </div>
-                </div>
+          foreach ($contractors as $contractor) {
+            // If a filter term is provided, check if the contractor matches the filter
+            // If not, skip to the next iteration of the loop
+            if ($filterTerm !== '' && stripos($contractor['type'], $filterTerm) === false) {
+              continue;
+            }
+          ?>
+            <div class="contractor-card">
+              <h5 class="fs-19 mb-0">
+                <a class="primary-link" href="#">
+                  <?php echo $contractor['firstname'] . ' ' . $contractor['secondname'] ?>
+                </a>
+                <span class="rating-box">
+                  <i class="mdi mdi-star align-middle">
+                    <?php echo $contractor['rating']; ?>
+                  </i>
+                </span>
+              </h5>
+              <p class="contractor-info">Type Of Work:<?php echo $contractor['type']; ?></p>
+              <ul class="list-inline mb-0 text-muted">
+                <li class="contractor-info"><i class="mdi mdi-map-marker"></i> Place:<?php echo $contractor['place']; ?></li>
+                <li class="contractor-info"><i class="mdi mdi-wallet"></i> Contact:<?php echo $contractor['phone']; ?></li>
+                <li class="contractor-info"><i class="mdi mdi-map-marker"></i> Mail:<?php echo $contractor['email']; ?></li>
+              </ul>
+              <form id="requestForm" action="request_contractor.php" value="<?php echo $contractor['id']; ?>" method="post">
+                <input type="hidden" name="selected_date" class="datepicker">
+                <input type="hidden" name="contractor_id" value="<?php echo $contractor['id']; ?>">
+                <button type="button" class="btn btn-primary mt-3" onclick="showDatePicker(<?php echo $contractor['id']; ?>)">Select Date</button>
+                <button type="submit" class="btn btn-primary mt-3" name="submit_request">Request Service</button>
+              </form>
             </div>
+          <?php } ?>
         </div>
-    </div>
-   <?php }?>
-
-   </section>
-
+      </div>
+    </section>
   </main>
 
   <script>

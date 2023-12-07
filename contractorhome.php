@@ -35,6 +35,12 @@ include 'contractorapprove.php';
   <link href="styleindex.css" rel="stylesheet">
   <link rel="stylesheet" href="editsec.css">
 
+
+   <!-- Add these script tags to include jQuery and jQuery UI -->
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   </head>
 
 <body>
@@ -65,7 +71,7 @@ include 'contractorapprove.php';
           <li><a href="contractorhome.php" ><i class="bx bx-home"></i> <span>About</span></a></li>
           <li><a href="approved_worker.php"><i class="bx bx-file-blank"></i> <span>Approved Worker</span></a></li>
           <li><a href="workers.php"><i class="bx bx-file-blank"></i> <span>Workers</span></a></li>
-          
+          <li><a href="contractor_projects.php"><i class="bx bx-file-blank"></i> <span>Previous Works</span></a></li>
           <li><a href="contractoredit.php" ><i class="bx bx-server"></i> <span>Edit</span></a></li>
           <li><a href="logout.php"><i class="bx bx-log-out"></i> <span>Logout</span></a></li>
          
@@ -75,9 +81,8 @@ include 'contractorapprove.php';
   </header>
 
   <main id="main">
-
-  <section id="about" class="about">
-    <div class="container">
+    <section id="about" class="about">
+      <div class="container">
 
       <div class="section-title">
         <h2>About</h2>
@@ -106,65 +111,81 @@ include 'contractorapprove.php';
             
           </div>
           <h2>Approval Requests</h2>
-    <div class="customer-card">
-    <?php if (!empty($customerapp)) {
-    // The array is not empty, process the data
-    foreach($customerapp as $customer){
-    
-    
-  
-         ?>
-        <p class="customer-info">Customer ID: <?php echo $customer['id']; ?>, Name: <?php echo $customer['name'] . " " . $customer['last']; ?></p>
-        <p class="customer-info">Email: <?php echo $customer['email']; ?>, Phone: <?php echo $customer['phone']; ?></p>
-        <p class="customer-info">Place: <?php echo $customer['place']; ?></p>
-        <p class="customer-info">Date: <?php echo $customer['date']; ?>, ID: <?php echo $customer['id']; ?></p>
-        <div class="customer_action-buttons">
-            <form action="contractor_approve_reject.php" method="post">
-                <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
-                <input type="hidden" name="customer_id" value="<?php echo $customer['id']; ?>">
-                <button type="submit" name="action" value="approve">Approve</button>
-            </form>
+        <div class="customer-card">
+          <?php if (!empty($customerapp)) {
+            // The array is not empty, process the data
+            foreach ($customerapp as $customer) {
+          ?>
+              <p class="customer-info">Customer ID: <?php echo $customer['id']; ?>, Name: <?php echo $customer['name'] . " " . $customer['last']; ?></p>
+              <p class="customer-info">Email: <?php echo $customer['email']; ?>, Phone: <?php echo $customer['phone']; ?></p>
+              <p class="customer-info">Place: <?php echo $customer['place']; ?></p>
+              <p class="customer-info">Date: <?php echo $customer['date']; ?>, ID: <?php echo $customer['id']; ?></p>
+              <div class="customer_action-buttons">
+                <form action="contractor_approve_reject.php" method="post">
+                  <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
+                  <input type="hidden" name="customer_id" value="<?php echo $customer['id']; ?>">
+                  <button type="submit" name="action" value="approve">Approve</button>
+                </form>
 
-            <form action="contractor_approve_reject.php" method="post">
-                <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
-                <input type="hidden" name="customer_id" value="<?php echo $customer['id']; ?>">
-                <button type="submit" name="action" value="reject">Reject</button>
-            </form>
+                <form action="contractor_approve_reject.php" method="post">
+                  <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
+                  <input type="hidden" name="customer_id" value="<?php echo $customer['id']; ?>">
+                  <button type="submit" name="action" value="reject">Reject</button>
+                </form>
+              </div>
+          <?php
+            }
+          } else {
+            // The array is empty
+            echo "No approval requests found.";
+          }
+          ?>
         </div>
-    <?php }}else {
-      // The array is empty
-      echo "No approval requests found.";} ?>
-</div>
-    <h2>Service Ongoing</h2>
-    <div class="customer-card">
-    <?php if (!empty($customeracc)) {
-    // The array is not empty, process the data
-    foreach($customeracc as $customer2){
-    
-    
-  
-         ?>
-        <p class="customer-info">Customer ID: <?php echo $customer2['id']; ?>, Name: <?php echo $customer2['name'] . " " . $customer2['last']; ?></p>
-        <p class="customer-info">Email: <?php echo $customer2['email']; ?>, Phone: <?php echo $customer2['phone']; ?></p>
-        <p class="customer-info">Place: <?php echo $customer2['place']; ?></p> 
-        <p class="customer-info">Date: <?php echo $customer2['date']; ?></p>
-        <p class="customer-info">ID: <?php echo $customer2['id']; ?></p>
-            <form action="contractfinished.php" method="post">
-                <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
-                <input type="hidden" name="customer_id" value="<?php echo $customer2['id']; ?>">
-                <button type="submit" name="action" value="finished">Finished</button>
-            </form>
 
-            
+        <h2>Service Ongoing</h2>
+        <div class="customer-card">
+          <?php if (!empty($customeracc)) {
+            // The array is not empty, process the data
+            foreach ($customeracc as $customer2) {
+          ?>
+              <p class="customer-info">Customer ID: <?php echo $customer2['id']; ?></p>
+              <p class="customer-info"> Name: <?php echo $customer2['name'] . " " . $customer2['last']; ?></p>
+              <p class="customer-info">Email: <?php echo $customer2['email']; ?></p>
+              <p class="customer-info"> Phone: <?php echo $customer2['phone']; ?></p>
+              <p class="customer-info">Place: <?php echo $customer2['place']; ?></p>
+              <p class="customer-info">Date: <?php echo $customer2['date']; ?></p>
+               
+              <form action="contractfinished.php" method="post">
+    <input type="hidden" name="contractor_id" value="<?php echo $contractor2_id; ?>">
+    <input type="hidden" name="customer_id" value="<?php echo $customer2['id']; ?>">
+    <input type="hidden" name="selected_date" class="datepicker">
+    <button type="button" class="btn btn-primary mt-3" onclick="showDatePicker(<?php echo $customer2['id']; ?>)">Select Date</button>
+    <button type="submit" name="action" value="finished">Finished</button>
+</form>
+          <?php
+            }
+          }
+          ?>
         </div>
-    <?php }} ?>
+
       </div>
-      
-
-    </div>
-  </section>
-
+    </section>
   </main>
+
+  <script>
+    $(document).ready(function() {
+      // Initialize datepicker
+      $(".datepicker").datepicker({
+        dateFormat: 'yy-mm-dd', // Set the desired date format
+        minDate: 0 // Restrict date selection to future dates
+      });
+
+      // Function to show datepicker on button click
+      window.showDatePicker = function() {
+        $(".datepicker").datepicker("show");
+      };
+    });
+  </script>
 
   
 </body>
